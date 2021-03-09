@@ -5,7 +5,7 @@
  * version 2.0 (the "License"); you may not use this file except in compliance
  * with the License. You may obtain a copy of the License at:
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *   https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -56,6 +56,16 @@ class Hidden {
             );
 
             builder.allowBlockingCallsInside(
+                    "io.netty.util.HashedWheelTimer",
+                    "start"
+            );
+
+            builder.allowBlockingCallsInside(
+                    "io.netty.util.HashedWheelTimer",
+                    "stop"
+            );
+
+            builder.allowBlockingCallsInside(
                     "io.netty.util.HashedWheelTimer$Worker",
                     "waitForNextTick"
             );
@@ -88,6 +98,10 @@ class Hidden {
                     "takeTask");
 
             builder.allowBlockingCallsInside(
+                    "io.netty.util.concurrent.SingleThreadEventExecutor",
+                    "addTask");
+
+            builder.allowBlockingCallsInside(
                     "io.netty.handler.ssl.ReferenceCountedOpenSslClientContext$ExtendedTrustManagerVerifyCallback",
                     "verify");
 
@@ -96,6 +110,26 @@ class Hidden {
             builder.allowBlockingCallsInside(
                     "sun.security.ssl.SSLEngineImpl",
                     "unwrap");
+
+            builder.allowBlockingCallsInside(
+                    "sun.security.ssl.SSLEngineImpl",
+                    "wrap");
+
+            builder.allowBlockingCallsInside(
+                    "io.netty.resolver.dns.UnixResolverDnsServerAddressStreamProvider",
+                    "parse");
+
+            builder.allowBlockingCallsInside(
+                    "io.netty.resolver.dns.UnixResolverDnsServerAddressStreamProvider",
+                    "parseEtcResolverSearchDomains");
+
+            builder.allowBlockingCallsInside(
+                    "io.netty.resolver.dns.UnixResolverDnsServerAddressStreamProvider",
+                    "parseEtcResolverOptions");
+
+            builder.allowBlockingCallsInside(
+                    "io.netty.resolver.HostsFileParser",
+                    "parse");
 
             builder.nonBlockingThreadPredicate(new Function<Predicate<Thread>, Predicate<Thread>>() {
                 @Override
